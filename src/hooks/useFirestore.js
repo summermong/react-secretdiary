@@ -1,0 +1,37 @@
+import { collection } from "firebase/firestore"
+import { useReducer } from "react"
+import { appFireStore } from "../firebase/config"
+
+const initState = {
+    document: null,
+    isPending: false,
+    error: null,
+    success: false
+}
+
+const storeReducer = (state, action) => {
+    switch (action.type) {
+        default:
+            return state // initState
+    }
+}
+
+// firestore는 데이터를 객체로 저장함 (transaction === 저장할 컬렉션)
+// data(데이터) > document(데이터를 객체로 저장하는 공간) > collection(문서의 컨테이너)
+export const useFirestore = (transaction) => {
+    const [response, dispatch] = useReducer(storeReducer, initState)
+    
+    // 콜렉션의 참조 요청
+    // 콜렉션을 만들지 않았으면 자동으로 만들어서 그 주소를 colRef에 할당해줌
+    const colRef = collection(appFireStore, transaction);
+
+    // 콜렉션에 문서 추가
+    const addDocument = () => {
+    }
+
+    // 콜렉션에서 문서 제거
+    const deleteDocument = (id) => {
+    }
+
+    return { addDocument, deleteDocument, response }
+}
