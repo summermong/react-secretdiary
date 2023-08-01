@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { useFirestore } from '../../hooks/useFirestore';
 
-const DiaryForm = () => {
+const DiaryForm = ({ uid }) => {
 
     const [title, setTitle] = useState("");
-    const [content, setContent] = useState("")
+    const [content, setContent] = useState("");
+    const { addDocument, response } = useFirestore('diary')
 
     const handleData = (e) => {
         if (e.target.id === "title") {
@@ -13,9 +15,10 @@ const DiaryForm = () => {
         }
     }
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(title, content)
+        console.log(title, content);
+        await addDocument({ uid, title, content }); // user의 아이디
     }
 
   return (
