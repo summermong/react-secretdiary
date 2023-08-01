@@ -8,7 +8,7 @@ import DiaryList from './DiaryList'
 const Home = () => {
 
   const { user } = useAuthContext();
-  const { documents, error } = useCollection('diary');
+  const { documents, error } = useCollection('diary', ["uid", "==", user.uid]);
 
   return (
     <main className={styles.cont}>
